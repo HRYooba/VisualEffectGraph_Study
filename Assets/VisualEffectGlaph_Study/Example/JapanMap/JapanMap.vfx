@@ -117,9 +117,9 @@ MonoBehaviour:
     position:
       serializedVersion: 2
       x: -794
-      y: 2466
+      y: 2442
       width: 1502
-      height: 451
+      height: 478
     contents:
     - model: {fileID: 8926484042661615309}
       id: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -1530
     y: -467
-    width: 3514
-    height: 4395
+    width: 3542
+    height: 4409
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -716,11 +716,11 @@ VisualEffectResource:
     name: '[System 3]Initialize'
     source: "#pragma kernel CSMain\n#define NB_THREADS_PER_GROUP 64\n#define VFX_USE_LIFETIME_CURRENT
       1\n#define VFX_USE_SEED_CURRENT 1\n#define VFX_USE_POSITION_CURRENT 1\n#define
-      VFX_USE_PARTICLEID_CURRENT 1\n#define VFX_USE_COLOR_CURRENT 1\n#define VFX_USE_TARGETPOSITION_CURRENT
-      1\n#define VFX_USE_AGE_CURRENT 1\n#define VFX_USE_ALIVE_CURRENT 1\n#define VFX_LOCAL_SPACE
-      1\n#include \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/HDRP/VFXDefines.hlsl\"\n\n\nCBUFFER_START(parameters)\n
+      VFX_USE_PARTICLEID_CURRENT 1\n#define VFX_USE_TARGETPOSITION_CURRENT 1\n#define
+      VFX_USE_COLOR_CURRENT 1\n#define VFX_USE_AGE_CURRENT 1\n#define VFX_USE_ALIVE_CURRENT
+      1\n#define VFX_LOCAL_SPACE 1\n#include \"Packages/com.unity.visualeffectgraph/Shaders/RenderPipeline/HDRP/VFXDefines.hlsl\"\n\n\nCBUFFER_START(parameters)\n
       \   float Color_j;\n    uint3 PADDING_0;\nCBUFFER_END\nTexture2D attributeMap_b;\nSamplerState
-      samplerattributeMap_b;\nTexture2D attributeMap_c;\nSamplerState samplerattributeMap_c;\n\n\n#include
+      samplerattributeMap_b;\nTexture2D attributeMap_d;\nSamplerState samplerattributeMap_d;\n\n\n#include
       \"Packages/com.unity.visualeffectgraph/Shaders/Common/VFXCommonCompute.cginc\"\n#include
       \"Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc\"\n\n\n\nRWByteAddressBuffer
       attributeBuffer;\nByteAddressBuffer sourceAttributeBuffer;\n\nCBUFFER_START(initParams)\n#if
@@ -741,13 +741,6 @@ VisualEffectResource:
       \   uint count = width * height;\n    uint id = FIXED_RAND(Seed) * count;\n
       \   uint y = id / width;\n    uint x = id - y * width;\n    float3 value = (float3)attributeMap.t.Load(int3(x,
       y, 0));\n    value = (value  + valueBias) * valueScale;\n    position = value;\n}\nvoid
-      AttributeFromMap_9AACC55(inout float3 color, uint particleId, VFXSampler2D attributeMap,
-      uint Seed, float3 valueBias, float3 valueScale) /*attribute:color Composition:Overwrite
-      SampleMode:RandomConstantPerParticle channels:XYZ */\n{\n    \n    uint width,
-      height;\n    attributeMap.t.GetDimensions(width, height);\n    uint count =
-      width * height;\n    uint id = FIXED_RAND(Seed) * count;\n    uint y = id /
-      width;\n    uint x = id - y * width;\n    float3 value = (float3)attributeMap.t.Load(int3(x,
-      y, 0));\n    value = (value  + valueBias) * valueScale;\n    color = value;\n}\nvoid
       AttributeFromMap_62C5EC24(inout float3 targetPosition, uint particleId, VFXSampler2D
       attributeMap, uint Seed, float3 valueBias, float3 valueScale) /*attribute:targetPosition
       Composition:Overwrite SampleMode:RandomConstantPerParticle channels:XYZ */\n{\n
@@ -755,13 +748,19 @@ VisualEffectResource:
       \   uint count = width * height;\n    uint id = FIXED_RAND(Seed) * count;\n
       \   uint y = id / width;\n    uint x = id - y * width;\n    float3 value = (float3)attributeMap.t.Load(int3(x,
       y, 0));\n    value = (value  + valueBias) * valueScale;\n    targetPosition
-      = value;\n}\nvoid SetAttribute_FDD06EC7(inout float3 color, float3 Color) /*attribute:color
-      Composition:Overwrite Source:Slot Random:Off channels:XYZ */\n{\n    color =
-      Color;\n}\nvoid SetAttribute_C707D62A(inout float3 position, float3 Position)
-      /*attribute:position Composition:Add Source:Slot Random:Off channels:XYZ */\n{\n
-      \   position += Position;\n}\nvoid SetAttribute_30AEC127(inout float3 targetPosition,
-      float3 TargetPosition) /*attribute:targetPosition Composition:Add Source:Slot
-      Random:Off channels:XYZ */\n{\n    targetPosition += TargetPosition;\n}\nvoid
+      = value;\n}\nvoid AttributeFromMap_9AACC55(inout float3 color, uint particleId,
+      VFXSampler2D attributeMap, uint Seed, float3 valueBias, float3 valueScale) /*attribute:color
+      Composition:Overwrite SampleMode:RandomConstantPerParticle channels:XYZ */\n{\n
+      \   \n    uint width, height;\n    attributeMap.t.GetDimensions(width, height);\n
+      \   uint count = width * height;\n    uint id = FIXED_RAND(Seed) * count;\n
+      \   uint y = id / width;\n    uint x = id - y * width;\n    float3 value = (float3)attributeMap.t.Load(int3(x,
+      y, 0));\n    value = (value  + valueBias) * valueScale;\n    color = value;\n}\nvoid
+      SetAttribute_FDD06EC7(inout float3 color, float3 Color) /*attribute:color Composition:Overwrite
+      Source:Slot Random:Off channels:XYZ */\n{\n    color = Color;\n}\nvoid SetAttribute_C707D62A(inout
+      float3 position, float3 Position) /*attribute:position Composition:Add Source:Slot
+      Random:Off channels:XYZ */\n{\n    position += Position;\n}\nvoid SetAttribute_30AEC127(inout
+      float3 targetPosition, float3 TargetPosition) /*attribute:targetPosition Composition:Add
+      Source:Slot Random:Off channels:XYZ */\n{\n    targetPosition += TargetPosition;\n}\nvoid
       SetAttribute_C707D7BF(inout float3 position, inout uint seed, float3 Min, float3
       Max) /*attribute:position Composition:Add Source:Slot Random:PerComponent channels:XYZ
       */\n{\n    position += lerp(Min,Max,RAND3);\n}\nvoid AttributeFromCurve_80EE3201(inout
@@ -788,19 +787,19 @@ VisualEffectResource:
       \           if (id < currentSumSpawnCount)\n            {\n                break;\n
       \           }\n        }\n        */\n        \n\n#endif\n        float lifetime
       = (float)1;\n        uint seed = (uint)0;\n        float3 position = float3(0,0,0);\n
-      \       uint particleId = (uint)0;\n        float3 color = float3(1,1,1);\n
-      \       float3 targetPosition = float3(0,0,0);\n        float age = (float)0;\n
-      \       bool alive = (bool)true;\n        \n\n#if VFX_USE_PARTICLEID_CURRENT\n
-      \        particleId = particleIndex;\n#endif\n#if VFX_USE_SEED_CURRENT\n        seed
-      = WangHash(particleIndex ^ systemSeed);\n#endif\n        \n        {\n            SetAttribute_F01429A3(
+      \       uint particleId = (uint)0;\n        float3 targetPosition = float3(0,0,0);\n
+      \       float3 color = float3(1,1,1);\n        float age = (float)0;\n        bool
+      alive = (bool)true;\n        \n\n#if VFX_USE_PARTICLEID_CURRENT\n         particleId
+      = particleIndex;\n#endif\n#if VFX_USE_SEED_CURRENT\n        seed = WangHash(particleIndex
+      ^ systemSeed);\n#endif\n        \n        {\n            SetAttribute_F01429A3(
       /*inout */lifetime,  /*inout */seed, (float)1, (float)3);\n        }\n        {\n
       \           AttributeFromMap_6F6C36D5( /*inout */position, particleId, GetVFXSampler(attributeMap_b,
       samplerattributeMap_b), (uint)0, float3(0,0,0), float3(3,3,3));\n        }\n
-      \       {\n            AttributeFromMap_9AACC55( /*inout */color, particleId,
-      GetVFXSampler(attributeMap_c, samplerattributeMap_c), (uint)0, float3(0,0,0),
-      float3(1,1,1));\n        }\n        {\n            AttributeFromMap_62C5EC24(
-      /*inout */targetPosition, particleId, GetVFXSampler(attributeMap_b, samplerattributeMap_b),
-      (uint)1, float3(0,0,0), float3(3,3,3));\n        }\n        {\n            float
+      \       {\n            AttributeFromMap_62C5EC24( /*inout */targetPosition,
+      particleId, GetVFXSampler(attributeMap_b, samplerattributeMap_b), (uint)1, float3(0,0,0),
+      float3(3,3,3));\n        }\n        {\n            AttributeFromMap_9AACC55(
+      /*inout */color, particleId, GetVFXSampler(attributeMap_d, samplerattributeMap_d),
+      (uint)0, float3(0,0,0), float3(1,1,1));\n        }\n        {\n            float
       tmp_n = color[0];\n            float tmp_o = color[1];\n            float tmp_p
       = color[2];\n            float3 tmp_q = float3(tmp_n, tmp_o, tmp_p);\n            float3
       tmp_r = RGBtoHSV(tmp_q);\n            float3 tmp_t = tmp_r * float3(1,2.67,1);\n
@@ -810,9 +809,9 @@ VisualEffectResource:
       */color, tmp_y);\n        }\n        {\n            float tmp_o = color[2];\n
       \           float tmp_q = tmp_o * (float)0.61;\n            float3 tmp_r = float3((float)0,
       (float)0, tmp_q);\n            SetAttribute_C707D62A( /*inout */position, tmp_r);\n
-      \       }\n        {\n            float tmp_n = color[2];\n            float
-      tmp_p = tmp_n * (float)0.61;\n            float3 tmp_q = float3(tmp_p, tmp_p,
-      tmp_p);\n            SetAttribute_30AEC127( /*inout */targetPosition, tmp_q);\n
+      \       }\n        {\n            float tmp_o = color[2];\n            float
+      tmp_q = tmp_o * (float)0.61;\n            float3 tmp_r = float3((float)0, (float)0,
+      tmp_q);\n            SetAttribute_30AEC127( /*inout */targetPosition, tmp_r);\n
       \       }\n        {\n            SetAttribute_C707D7BF( /*inout */position,
       \ /*inout */seed, float3(-0.01,-0.01,0), float3(0.01,0.01,0));\n        }\n
       \       {\n            float tmp_n = color[0];\n            float tmp_o = color[1];\n
@@ -826,15 +825,15 @@ VisualEffectResource:
       \           uint index = deadListIn[deadIndex];\n            attributeBuffer.Store((index
       * 0x1 + 0x0) << 2,asuint(lifetime));\n            attributeBuffer.Store3((index
       * 0x8 + 0x186C0) << 2,asuint(position));\n            attributeBuffer.Store3((index
-      * 0x8 + 0x186C4) << 2,asuint(color));\n            attributeBuffer.Store3((index
-      * 0x4 + 0x10CA40) << 2,asuint(targetPosition));\n            attributeBuffer.Store((index
+      * 0x4 + 0x10CA40) << 2,asuint(targetPosition));\n            attributeBuffer.Store3((index
+      * 0x8 + 0x186C4) << 2,asuint(color));\n            attributeBuffer.Store((index
       * 0x1 + 0xDBCC0) << 2,asuint(age));\n            attributeBuffer.Store((index
       * 0x1 + 0xF4380) << 2,uint(alive));\n            \n\n        }\n#else\n        uint
       index = particleIndex;\n        attributeBuffer.Store((index * 0x1 + 0x0) <<
       2,asuint(lifetime));\n        attributeBuffer.Store3((index * 0x8 + 0x186C0)
-      << 2,asuint(position));\n        attributeBuffer.Store3((index * 0x8 + 0x186C4)
-      << 2,asuint(color));\n        attributeBuffer.Store3((index * 0x4 + 0x10CA40)
-      << 2,asuint(targetPosition));\n        attributeBuffer.Store((index * 0x1 +
+      << 2,asuint(position));\n        attributeBuffer.Store3((index * 0x4 + 0x10CA40)
+      << 2,asuint(targetPosition));\n        attributeBuffer.Store3((index * 0x8 +
+      0x186C4) << 2,asuint(color));\n        attributeBuffer.Store((index * 0x1 +
       0xDBCC0) << 2,asuint(age));\n        attributeBuffer.Store((index * 0x1 + 0xF4380)
       << 2,uint(alive));\n        \n\n#endif\n    }\n}\n"
   - compute: 1
@@ -1893,7 +1892,7 @@ VisualEffectResource:
         index: 17
       - nameId: attributeMap_b
         index: 19
-      - nameId: attributeMap_c
+      - nameId: attributeMap_d
         index: 30
       params:
       - nameId: bounds_center
@@ -2230,7 +2229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 805, y: 2826}
+  m_UIPosition: {x: 810, y: 2762}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2268,7 +2267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1581, y: 2503}
+  m_UIPosition: {x: 1609, y: 2517}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2335,7 +2334,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614605}
   - {fileID: 8926484042661614606}
   - {fileID: 8926484042661614607}
-  m_UIPosition: {x: 1582, y: 2730}
+  m_UIPosition: {x: 1610, y: 2744}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2842,7 +2841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1598, y: 3279}
+  m_UIPosition: {x: 1626, y: 3293}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -2878,7 +2877,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614612}
   - {fileID: 8926484042661614614}
   - {fileID: 8926484042661614619}
-  m_UIPosition: {x: 1608, y: 3463}
+  m_UIPosition: {x: 1636, y: 3477}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -3306,7 +3305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1294, y: 3683}
+  m_UIPosition: {x: 1322, y: 3697}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -3466,7 +3465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1288, y: 3818}
+  m_UIPosition: {x: 1316, y: 3832}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -3489,7 +3488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 487, y: 2266}
+  m_UIPosition: {x: 495, y: 2237}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -3842,8 +3841,8 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614723}
   - {fileID: 8926484042661614702}
-  - {fileID: 8926484042661614753}
   - {fileID: 8926484042661615362}
+  - {fileID: 8926484042661614753}
   - {fileID: 8926484042661614766}
   - {fileID: 8926484042661614851}
   - {fileID: 8926484042661615373}
@@ -10043,7 +10042,7 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661614863}
-  - {fileID: 8926484042661615378}
+  - {fileID: 8926484042661615381}
 --- !u!114 &8926484042661614949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10873,7 +10872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: -209, y: 2614}
+  m_UIPosition: {x: -243, y: 2609}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -10895,7 +10894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 8926484042661615031}
   m_Children: []
-  m_UIPosition: {x: 0, y: 415}
+  m_UIPosition: {x: 0, y: 294}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -11249,7 +11248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 508, y: 1829}
+  m_UIPosition: {x: 447, y: 1825}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -13796,7 +13795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 8926484042661615031}
   m_Children: []
-  m_UIPosition: {x: 0, y: 340}
+  m_UIPosition: {x: 0, y: 219}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -13958,7 +13957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 528, y: 1688}
+  m_UIPosition: {x: 509, y: 1677}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -14118,7 +14117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: -203, y: 2529}
+  m_UIPosition: {x: -252, y: 2505}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -14552,7 +14551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Parent: {fileID: 8926484042661614686}
   m_Children: []
-  m_UIPosition: {x: 0, y: 924}
+  m_UIPosition: {x: 0, y: 419}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -14946,7 +14945,7 @@ MonoBehaviour:
   m_Parent: {fileID: 8926484042661614686}
   m_Children: []
   m_UIPosition: {x: 103.51044, y: 656.3308}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots:
   - {fileID: 8926484042661615378}
@@ -14975,7 +14974,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615380}
   - {fileID: 8926484042661615381}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661615378}
   m_MasterData:
@@ -14993,8 +14992,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
     attributes: []
   m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661614933}
+  m_LinkedSlots: []
 --- !u!114 &8926484042661615379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15093,7 +15091,8 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
     attributes: []
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661614933}
 --- !u!114 &8926484042661615382
 MonoBehaviour:
   m_ObjectHideFlags: 0
