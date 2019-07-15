@@ -261,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624004885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.61}
+  m_LocalPosition: {x: 0, y: 0, z: -2.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 715921490}
   - component: {fileID: 715921489}
   - component: {fileID: 715921488}
+  - component: {fileID: 715921491}
   m_Layer: 0
   m_Name: Visual Effect
   m_TagString: Untagged
@@ -396,6 +397,7 @@ VFXRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -459,13 +461,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715921487}
-  m_LocalRotation: {x: 0.33455077, y: -0.058829535, z: 0.020930897, w: 0.9403068}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.2}
+  m_LocalRotation: {x: 0.3526245, y: 0.3023801, z: -0.12155604, w: 0.8771809}
+  m_LocalPosition: {x: 0, y: -0.7, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 39.17, y: -7.16, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.002598, y: 20.097692, z: -5.7245283}
+--- !u!111 &715921491
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715921487}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 26e230c070e15144b8138e002957f17d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 26e230c070e15144b8138e002957f17d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1348715413
 GameObject:
   m_ObjectHideFlags: 0
