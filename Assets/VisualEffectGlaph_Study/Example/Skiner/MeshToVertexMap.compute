@@ -1,0 +1,21 @@
+﻿#pragma kernel CSMain
+
+StructuredBuffer<float> VertexBuffer;
+RWTexture2D<float4> VertexMap;
+
+int Width;
+int Height;
+int Count;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    uint i = id.x + id.y * Width; // 0 ~ width*height
+    uint bufferIndex = i * 3; // 0 ~ width*height*3
+
+    float x = VertexBuffer[bufferIndex];
+    float y = VertexBuffer[bufferIndex + 1];
+    float z = VertexBuffer[bufferIndex + 2];
+
+    VertexMap[id.xy] = float4(x, y, z, i < Count ? 1.0 : 0.0);
+}
