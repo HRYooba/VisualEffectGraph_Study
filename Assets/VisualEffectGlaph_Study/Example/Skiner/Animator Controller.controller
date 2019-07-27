@@ -1,14 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-4498554829651980142
+--- !u!1102 &-8345039922412722197
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Breakdance Ending 3
-  m_Speed: 1
+  m_Name: Swing Dancing
+  m_Speed: 1.3
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 6cf1b98c8c933524d8c225d575a5974e,
+  m_Motion: {fileID: -203655887218126122, guid: b006aa44a008ac6409a7cf80b93ca1aa,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -59,8 +59,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -4498554829651980142}
-    m_Position: {x: 289, y: 183, z: 0}
+    m_State: {fileID: -8345039922412722197}
+    m_Position: {x: 310, y: 160, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -70,4 +70,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -4498554829651980142}
+  m_DefaultState: {fileID: -8345039922412722197}
